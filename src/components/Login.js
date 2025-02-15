@@ -1,32 +1,82 @@
+import { useRef, useState } from "react";
 import Header from "./Header";
+import validate from "../utils/validate";
 
 const Login = () => {
+  const email = useRef();
+  const password = useRef();
+  const fullName = useRef();
+  const [message, setMessage] = useState(null);
+  const [isSignIn, setIsSignIn] = useState(true);
+
+  const handleSubmit = () => {
+    const msg = validate(email.current.value, password.current.value);
+    setMessage(msg);
+  };
+
+  const toggleSignIn = () => {
+    setIsSignIn(!isSignIn);
+  };
   return (
     <div className="relative ">
       <Header />
-      <div className="absolute bg-black opacity-90 rounded-md -translate-x-1/2 -translate-y-1/2 top-1/3 left-1/2">
-        <form className="flex flex-wrap flex-col m-10">
-          <span className="text-white mb-5">Sign In</span>
+      <div className="absolute bg-black opacity-90 rounded-md -translate-x-1/2 -translate-y-1/2 top-1/3 left-1/2 mt-28">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+          className="flex flex-wrap flex-col m-10"
+        >
+          <span className="text-white mb-5">
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </span>
+
+          {!isSignIn && (
+            <>
+              <label className="text-white">Full Name</label>
+              <input
+                ref={fullName}
+                className="border-solid mb-5"
+                type="text"
+                id="fullName"
+                name="fullName"
+              ></input>
+            </>
+          )}
 
           <label className="text-white"> Email Address</label>
           <input
+            ref={email}
             className="border-solid mb-5"
             type="text"
             id="username"
             name="username"
           ></input>
-          <label className="text-white"> Password</label>
 
+          <label className="text-white"> Password</label>
           <input
+            ref={password}
             className="border-solid mb-5"
             type="password"
             id="password"
             name="password"
           ></input>
-          <span className="text-white">New User ? Sign Up</span>
+          <span className="text-red-600 pb-2">{message}</span>
+          <button className="text-white bg-red-600" onClick={handleSubmit}>
+            Submit
+          </button>
+          <span
+            className="text-white mt-5 cursor-pointer"
+            onClick={toggleSignIn}
+          >
+            {isSignIn ? "New User ? Sign Up" : "Already a User ? Sign In"}
+          </span>
         </form>
       </div>
-      <img src="https://assets.nflxext.com/ffe/siteui/vlv3/638e9299-0637-42d1-ba39-54ade4cf2bf6/web/IN-en-20250203-TRIFECTA-perspective_46eb8857-face-4ea6-b901-dbf22b461369_large.jpg"></img>
+      <img
+        className="w-full"
+        src="https://img.freepik.com/free-vector/night-ocean-landscape-full-moon-stars-shine_107791-7397.jpg?t=st=1739363746~exp=1739367346~hmac=4355dd30df1bcf65cd7228742b9237cf59f0a1cba87580836aeacb00da47e187&w=1060"
+      ></img>
     </div>
   );
 };
