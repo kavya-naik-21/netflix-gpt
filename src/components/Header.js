@@ -50,15 +50,16 @@ const Header = () => {
     <>
       <div className="absolute bg-gradient-to-b from-black w-full z-10">
         <img
-          className="w-72 ml-20 mt-10"
+          className="w-48 ml-20 mt-8"
           src={LOGO_URL}
+          alt="netflix-logo"
         ></img>
       </div>
 
       {user && (
         <div className="absolute right-10 top-10 z-10">
           <div className="flex justify-center">
-            <img className="mb-5 w-20" alt="usericon" src={user.photoURL}></img>
+            <img className="mb-5 w-10" alt="usericon" src={user.photoURL}></img>
           </div>
           <button
             className="bg-red-700 pr-2 pl-2 rounded-md"

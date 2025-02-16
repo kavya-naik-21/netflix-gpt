@@ -25,10 +25,6 @@ const Login = () => {
     setMessage(msg);
     if (msg !== null) return;
     if (!isSignIn) {
-      // console.log(fullName.current.value);
-      // console.log(email.current.value);
-      // console.log(password.current.value);
-
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
@@ -36,18 +32,13 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed up
-          const user = userCredential.user;
-          console.log(user);
           updateProfile(auth.currentUser, {
             displayName: fullName.current.value,
-            photoURL:
-              DEFAULT_PHOTO_URL,
+            photoURL: DEFAULT_PHOTO_URL,
           })
             .then(() => {
               // Profile updated!
-              // ...
               const { uid, email, displayName, photoURL } = auth.currentUser;
-              console.log(user);
               dispatch(
                 addUser({
                   uid: uid,
@@ -57,31 +48,17 @@ const Login = () => {
                 })
               );
             })
-            .catch((error) => {
-              // An error occurred
-              // ...
-            });
+            .catch((error) => {});
         })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(error);
-        });
+        .catch((error) => {});
     } else {
       signInWithEmailAndPassword(
         auth,
         email.current.value,
         password.current.value
       )
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(error);
-        });
+        .then((userCredential) => {})
+        .catch((error) => {});
     }
   };
 
@@ -146,6 +123,7 @@ const Login = () => {
       </div>
       <img
         className="w-full"
+        alt="background-image"
         src="https://img.freepik.com/free-vector/night-ocean-landscape-full-moon-stars-shine_107791-7397.jpg?t=st=1739363746~exp=1739367346~hmac=4355dd30df1bcf65cd7228742b9237cf59f0a1cba87580836aeacb00da47e187&w=1060"
       ></img>
     </div>
