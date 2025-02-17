@@ -7,24 +7,26 @@ import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondayContainer";
 
 const Browse = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const getNowPlayingMovies = async () => {
-    const url = 'https://api.themoviedb.org/3/movie/now_playing?page=1';
-    const data = await fetch(url, API_OPTIONS)
-    const jsonData = await data.json()
-    dispatch(addnowPlayingMovies(jsonData.results))
-  }
+    const url = "https://api.themoviedb.org/3/movie/now_playing?page=1";
+    const data = await fetch(url, API_OPTIONS);
+    const jsonData = await data.json();
+    dispatch(addnowPlayingMovies(jsonData.results));
+  };
 
-  useEffect(()=> {
+  useEffect(() => {
     getNowPlayingMovies();
-  }, [])
+  }, []);
 
   return (
     <>
-        <Header />
-        <MainContainer/>
-        <SecondaryContainer/>
+      <Header />
+      <div className="">
+        <MainContainer />
+        <SecondaryContainer />
+      </div>
     </>
   );
 };
