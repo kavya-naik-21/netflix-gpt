@@ -23,10 +23,8 @@ const Browse = () => {
   return (
     <>
       <Header />
-      <div className="">
-        <MainContainer />
-        <SecondaryContainer />
-      </div>
+      <MainContainer />
+      <SecondaryContainer />
     </>
   );
 };
